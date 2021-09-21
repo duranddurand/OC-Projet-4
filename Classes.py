@@ -1,17 +1,16 @@
 class Player:
-    def __init__(self, surname, name, birthdate, gender, points, rank):
+    def __init__(self, surname, name, birthdate, gender, ranking):
         self.surname = surname
         self.name = name
         self.birthdate = birthdate
         self.gender = gender
-        self.points = points
-        self.rank = rank
+        self.rank = ranking
 
     def display(self):
-        print(self.surname, self.name, self.birthdate, self.gender, self.points, self.rank)
+        print(self.surname, self.name, self.birthdate, self.gender, self.rank)
 
     def tupler(self):
-        return self.surname, self.name, self.birthdate, self.gender, self.points, self.rank
+        return self.surname, self.name, self.rank
 
 
 class Tournament:
@@ -28,24 +27,38 @@ class Tournament:
         self.description = description
 
 
+class Round:
+    def __init__(self, name, round_matchs, start_time, end_time):
+        self.name = name
+        self.round_matchs = round_matchs
+        self.start_time = start_time
+        self.end_time = end_time
+
+
+class Match:
+    def __init__(self, player1, player2):
+        self.player1 = player1
+        self.player2 = player2
+
+
 player_list = []
 
 
 for new_p in range(8):
-    player_list.append(Player('Prénom' + str(new_p + 1), 'nom' + str(new_p), new_p, 'M', 0, 9 - new_p))
-#   player_list[i].display()
+    player_list.append(Player('Prénom' + str(new_p + 1), 'nom' + str(new_p + 1), new_p, 'M', new_p + 1))
 
 
 tournament1 = Tournament('Tournois1', 'Paris', '11/09/2021', 4, [], player_list, 'blitz', '')
 
 
 def pairing(joueurs: Tournament.players) -> list:
+
     tuples = []
 
     for j in joueurs:
         tuples.append(j.tupler())
 
-    leaderboard = sorted(tuples, key=lambda player: player[5])
+    leaderboard = sorted(tuples, key=lambda player: player[2])
     half = len(leaderboard) // 2
     pairs = []
 
@@ -54,5 +67,5 @@ def pairing(joueurs: Tournament.players) -> list:
     return pairs
 
 
-for i in pairing(player_list):
-    print(i[0][0], i[1][0])
+for pair in pairing(tournament1.players):
+    print(pair[0][0], pair[1][0])
