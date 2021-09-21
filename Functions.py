@@ -8,7 +8,7 @@ def pairing(joueurs: Tournament.players) -> list:
     for j in joueurs:
         tuples.append(j.tupler())
 
-    leaderboard = sorted(tuples, key=lambda player: player[2])
+    leaderboard = sorted(joueurs, key=lambda player: player[2])
     half = len(leaderboard) // 2
     pairs = []
 
