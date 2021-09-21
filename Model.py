@@ -16,12 +16,12 @@ class Player:
 
 class Tournament:
 
-    def __init__(self, name, place, date, rounds, matches, players, timing, description):
+    def __init__(self, name, place, date, rounds, matchs, players, timing, description):
         self.name = name
         self.place = place
         self.date = date
         self.rounds = rounds
-        self.matches = matches
+        self.matchs = matchs
         self.players = players
         self.timing = timing
         self.description = description
@@ -29,18 +29,17 @@ class Tournament:
     def players_listed(self):
         players_list = []
         for player in self.players:
-            player_record = {
-                    'id': player.id,
-                    'name': player.name,
-                    'surname': player.surname,
-                    'birthdate': player.birthdate,
-                    'gender': player.gender,
-                    'ranking': player.ranking
+            player_dict = {
+                'id': player.id,
+                'name': player.name,
+                'surname': player.surname,
+                'birthdate': player.birthdate,
+                'gender': player.gender,
+                'ranking': player.ranking
             }
-            players_list.append(player_record)
+            players_list.append(player_dict)
 
         return players_list
-
 
     def matchs_listed(self):
         matchs_list = []
@@ -52,6 +51,7 @@ class Tournament:
             matchs_list.append(match_dict)
 
         return matchs_list
+
 
 class Round:
     def __init__(self, name, round_matchs, start_time, end_time):
