@@ -4,7 +4,7 @@ class Player:
         self.name = name
         self.birthdate = birthdate
         self.gender = gender
-        self.rank = ranking
+        self.ranking = ranking
 
     def display(self):
         print(self.surname, self.name, self.birthdate, self.gender, self.rank)
@@ -39,6 +39,3 @@ class Match:
     def __init__(self, player1, player2):
         self.player1 = player1
         self.player2 = player2
-
-
-

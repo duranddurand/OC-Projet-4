@@ -1,3 +1,6 @@
+from Model import Tournament, Player, Round, Match
+
+
 def pairing(joueurs: Tournament.players) -> list:
 
     tuples = []
