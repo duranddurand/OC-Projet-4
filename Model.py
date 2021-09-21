@@ -7,10 +7,10 @@ class Player:
         self.ranking = ranking
 
     def display(self):
-        print(self.surname, self.name, self.birthdate, self.gender, self.rank)
+        print(self.surname, self.name, self.birthdate, self.gender, self.ranking)
 
     def tupler(self):
-        return self.surname, self.name, self.rank
+        return self.surname, self.name, self.ranking
 
 
 class Tournament:

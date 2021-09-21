@@ -1,4 +1,4 @@
-from Model import Tournament, Player, Round, Match
+from Model import Tournament
 
 
 def pairing(joueurs: Tournament.players) -> list:

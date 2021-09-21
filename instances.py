@@ -1,5 +1,5 @@
 from Functions import pairing
-from Model import Tournament, Player, Round, Match
+from Model import Tournament, Player
 
 
 player_list = []
