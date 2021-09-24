@@ -5,7 +5,7 @@ class Player:
         self.birthdate = birthdate
         self.gender = gender
         self.ranking = ranking
-        self.id = (name[0].upper() + surname.upper() + birthdate.replace("/", ""))
+        self.id = (name[0].upper() + surname.upper() + birthdate.replace("/", "").upper())
 
     def display(self):
         print(self.surname, self.name, self.birthdate, self.gender, self.ranking)
@@ -14,14 +14,24 @@ class Player:
         return self.surname, self.name, self.ranking
 
 
-class Tournament:
+class Round:
+    def __init__(self, name, round_matchs, start_time, end_time):
+        self.name = name
+        self.round_matchs = round_matchs
+        self.start_time = start_time
+        self.end_time = end_time
 
-    def __init__(self, name, place, date, rounds, matchs, players, timing, description):
+
+class Tournament:
+    round_list = []
+    round_number = 0
+    players = []
+
+    def __init__(self, name, place, date, rounds, players, timing, description):
         self.name = name
         self.place = place
         self.date = date
         self.rounds = rounds
-        self.matchs = matchs
         self.players = players
         self.timing = timing
         self.description = description
@@ -39,29 +49,30 @@ class Tournament:
             }
             players_list.append(player_dict)
 
+        print(players_list)
         return players_list
 
     def matchs_listed(self):
         matchs_list = []
-        for match in self.matchs:
+        for match in self.rounds:
             match_dict = {
-                'players': [match[0][0], match[1][0]],
-                'score': [match[0][1], match[1][1]]
+                'players': [Match(match).player, Match(match).player2],
+                'score': [Match(match).score]
             }
             matchs_list.append(match_dict)
 
         return matchs_list
 
+    def players_len(self):
+        return len(self.players)
 
-class Round:
-    def __init__(self, name, round_matchs, start_time, end_time):
-        self.name = name
-        self.round_matchs = round_matchs
-        self.start_time = start_time
-        self.end_time = end_time
+    def display_players(self):
+        for i in self.players:
+            print(i.id)
 
 
 class Match:
-    def __init__(self, player1, player2):
+    def __init__(self, player1, score, player2):
         self.player1 = player1
         self.player2 = player2
+        self.score = score
