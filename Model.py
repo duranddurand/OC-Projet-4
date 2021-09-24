@@ -23,10 +23,6 @@ class Round:
 
 
 class Tournament:
-    round_list = []
-    round_number = 0
-    players = []
-
     def __init__(self, name, place, date, rounds, players, timing, description):
         self.name = name
         self.place = place
@@ -52,27 +48,9 @@ class Tournament:
         print(players_list)
         return players_list
 
-    def matchs_listed(self):
-        matchs_list = []
-        for match in self.rounds:
-            match_dict = {
-                'players': [Match(match).player, Match(match).player2],
-                'score': [Match(match).score]
-            }
-            matchs_list.append(match_dict)
-
-        return matchs_list
-
-    def players_len(self):
-        return len(self.players)
-
-    def display_players(self):
-        for i in self.players:
-            print(i.id)
-
 
 class Match:
-    def __init__(self, player1, score, player2):
+    def __init__(self, player1, player2, score):
         self.player1 = player1
         self.player2 = player2
         self.score = score
