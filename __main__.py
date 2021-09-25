@@ -1,4 +1,4 @@
-from Manager import start
+from program.start import start
 
 def main():
     start()
