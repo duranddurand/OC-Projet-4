@@ -7,12 +7,6 @@ class Player:
         self.ranking = ranking
         self.id = (name[0].upper() + surname.upper() + birthdate.replace("/", "").upper())
 
-    def display(self):
-        print(self.surname, self.name, self.birthdate, self.gender, self.ranking)
-
-    def tupler(self):
-        return self.surname, self.name, self.ranking
-
 
 class Round:
     def __init__(self, name, round_matchs, start_time, end_time):
