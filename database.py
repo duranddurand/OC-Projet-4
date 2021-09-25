@@ -28,3 +28,16 @@ class Database:
         table = db.table('running_tournament')
 
         return table
+
+    def save_player(self, player):
+        player_row = {
+            'first_name': player.name,
+            'last_name': player.surname,
+            'birth_date': player.birthdate,
+            'gender': player.gender,
+            'ranking': player.ranking,
+            'id': player.id
+        }
+
+        players_table = self.player_table()
+        players_table.insert(player_row)
