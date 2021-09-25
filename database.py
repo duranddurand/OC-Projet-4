@@ -22,3 +22,9 @@ class Database:
         table = db.table('tournament')
 
         return table
+
+    def running_tournament_table(self):
+        db = TinyDB(self.db)
+        table = db.table('running_tournament')
+
+        return table
