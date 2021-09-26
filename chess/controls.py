@@ -1,4 +1,4 @@
-from model import Tournament, Player
+from model import Player, Tournament
 
 
 def create_tournament():
@@ -37,14 +37,9 @@ def create_players():
     return player
 
 
-def enter_score():
-    return 0
-
-
-def pairing(tournament: Tournament):
+def pairing(players):
     pairs = []
 
-    players = tournament.players_listed()
     half = len(players) // 2
     leaderboard = sorted(players, key=lambda player: player.get('ranking', {}))
 

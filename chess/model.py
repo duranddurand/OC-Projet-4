@@ -26,22 +26,6 @@ class Tournament:
         self.timing = timing
         self.description = description
 
-    def players_listed(self):
-        players_list = []
-        for player in self.players:
-            player_dict = {
-                'id': player.id,
-                'name': player.name,
-                'surname': player.surname,
-                'birthdate': player.birthdate,
-                'gender': player.gender,
-                'ranking': player.ranking
-            }
-            players_list.append(player_dict)
-
-        print(players_list)
-        return players_list
-
 
 class Match:
     def __init__(self, player1, player2, issue):

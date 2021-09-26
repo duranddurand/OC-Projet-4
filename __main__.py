@@ -1,4 +1,5 @@
-from program.start import start
+import menus
+
 
 def main():
-    start()
+    menus.dashboard()
