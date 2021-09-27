@@ -26,7 +26,7 @@ def create_tournament():
     return tournament
 
 
-def create_players():
+def create_player():
     player_name = input("Prénom du joueur:")
     player_surname = input("Nom du joueur:")
     player_birthdate = input("Date de naissance:")
