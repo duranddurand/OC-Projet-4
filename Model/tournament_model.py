@@ -1,20 +1,4 @@
-class Player:
-    def __init__(self, name, surname, birthdate, gender, ranking):
-        self.name = name
-        self.surname = surname
-        self.birthdate = birthdate
-        self.gender = gender
-        self.ranking = ranking
-        self.id = (name[0].upper() + surname.upper() + birthdate.replace("/", "").upper())
-
-    def create_new(self):
-        self.name = input("Prénom du joueur:")
-        self.surname = input("Nom du joueur:")
-        self.birthdate = input("Date de naissance:")
-        self.gender = input("sexe:")
-        self.ranking = input("classement du joueur:")
-
-        new_player = Player(self.name, self.surname, self.birthdate, self.gender, self.ranking)
+import player_model
 
 class Round:
     def __init__(self, name, round_matchs, start_time, end_time):
@@ -62,9 +46,9 @@ class Tournament:
         while len(self.players) < 8:
             verify = input("\n>>> ")
             if verify == "1":
-                self.players.append(Player.create_new())
+                self.players.append(player_model.create_new())
             elif verify == "2":
-                self.players.append(Player.add_players())
+                self.players.append(player_model.add_players())
             elif verify == "3":
                 return 0
             else:

@@ -1,5 +1,4 @@
-import menus
+from Controller.menu import Controller
 
-
-def main():
-    menus.dashboard()
+if __name__ == "__main__":
+    Controller.main()
