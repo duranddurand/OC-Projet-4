@@ -1,14 +1,8 @@
-import player_model
-
-class Round:
-    def __init__(self, name, round_matchs, start_time, end_time):
-        self.name = name
-        self.round_matchs = round_matchs
-        self.start_time = start_time
-        self.end_time = end_time
+from control.model_control import PlayerControl as player
+#from control.database import *
 
 
-class Tournament:
+class Model:
     def __init__(self, name, place, date, rounds, players, timing, description):
         self.name = name
         self.place = place
@@ -44,15 +38,23 @@ class Tournament:
         print("######## Les joueurs ########")
         print("\n \n1: Nouveau \n2: Ajouter \nR: Retour")
         while len(self.players) < 8:
-            verify = input("\n>>> ")
-            if verify == "1":
-                self.players.append(player_model.create_new())
-            elif verify == "2":
-                self.players.append(player_model.add_players())
-            elif verify == "3":
+            val = input("\n: ")
+            if val == "1":
+                self.players.append(player.create_player())
+            elif val == "2":
+                self.players.append(player.add_players())
+            elif val == "3":
                 return 0
             else:
                 pass
+
+
+class Round:
+    def __init__(self, name, round_matchs, start_time, end_time):
+        self.name = name
+        self.round_matchs = round_matchs
+        self.start_time = start_time
+        self.end_time = end_time
 
 
 class Match:
@@ -60,4 +62,3 @@ class Match:
         self.player1 = player1
         self.player2 = player2
         self.issue = issue
-

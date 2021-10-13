@@ -1,7 +1,31 @@
-from Model.tournament_model import Tournament as T
+from Model.tournament_model import Model as Tournament_model
+from Model.player_model import Model as Player_model
 
 
-class TurnControl:
+class PlayerControl:
+
+    @staticmethod
+    def create_player():
+        name = input("Prénom du joueur:")
+        surname = input("Nom du joueur:")
+        birthdate = input("Date de naissance:")
+        gender = input("sexe:")
+        ranking = input("classement du joueur:")
+
+        player = Player_model(name, surname, birthdate, gender, ranking)
+
+        return player
+
+    @staticmethod
+    def edit_player():
+        return 0
+
+    @staticmethod
+    def add_player():
+        return 0
+
+
+class TournamentControl:
     @staticmethod
     def create_tournament():
         name = input("Nom du tournoi: ")
@@ -12,7 +36,7 @@ class TurnControl:
             rounds = 4
         timing = input("Contrôle du temps: ")
         description = input("Description: ")
-        tournament = T(name, place, date, rounds, [], timing, description)
+        tournament = Tournament_model(name, place, date, rounds, [], timing, description)
 
         print("\n\n1. Confirmer\n2. Refaire\n3. Retour")
         verify = input("\n>>> ")
@@ -28,7 +52,7 @@ class TurnControl:
         return tournament
 
     @staticmethod
-    def continue_tournament():
+    def open_tournament():
         return 0\
 
     @staticmethod
@@ -44,7 +68,7 @@ class TurnControl:
         return 0
 
     @staticmethod
-    def pairing():
+    def pairing_players():
         '''pairs = []
 
         half = len(players) // 2
