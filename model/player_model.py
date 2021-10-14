@@ -6,6 +6,3 @@ class Model:
         self.gender = gender
         self.ranking = ranking
         self.id = (name[0].upper() + surname.upper() + birthdate.replace("/", "").upper())
-
-
-

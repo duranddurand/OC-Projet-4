@@ -1,9 +1,12 @@
-from model_control import PlayerControl
-from model_control import TournamentControl
-from main_control import MainController as Main
+from .model_control import PlayerControl as Player, TournamentControl as Tournament
+from .main_control import MainController as Main
 
 
-class Controller:
+def test_imports():
+    print('works')
+
+
+class ViewController:
 
     @staticmethod
     def main_menu():
@@ -13,10 +16,10 @@ class Controller:
 
         if choice == "T":
             Main.clear()
-            Controller.tournament_menu()
+            ViewController.tournament_menu()
         elif choice == "J":
             Main.clear()
-            Controller.player_menu()
+            ViewController.player_menu()
         elif choice == "Q":
             Main.exit_program()
 
@@ -27,13 +30,29 @@ class Controller:
         choice = input("\n>> ")
 
         if choice == "1":
-            PlayerControl.create_player()
+            Player.create_player()
         elif choice == "2":
-            PlayerControl.edit_player()
+            Player.edit_player()
         elif choice == "3":
-            Controller.leaderboard()
+            ViewController.leaderboard()
         elif choice == "R":
-            Controller.main_menu()
+            ViewController.main_menu()
+        else:
+            pass
+
+    @staticmethod
+    def tournament_menu():
+        print("######## Tournois ########\
+                \n\n1. Nouveau \n2. Reprende \n3. Historique \nR: Retour")
+        choice = input("\n>> ")
+        if choice == "1":
+            Tournament.create_tournament()
+        elif choice == "2":
+            Tournament.open_tournament()
+        elif choice == "3":
+            Tournament.tournament_history()
+        elif choice == "R":
+            ViewController.main_menu()
         else:
             pass
 
@@ -44,26 +63,10 @@ class Controller:
         choice = input("\n>> ")
 
         if choice == "1":
-            TournamentControl.display_leaderboard()
+            Tournament.display_leaderboard()
         elif choice == "2":
-            TournamentControl.edit_leaderboard()
+            Tournament.edit_leaderboard()
         elif choice == "R":
-            Controller.player_menu()
-        else:
-            pass
-
-    @staticmethod
-    def tournament_menu():
-        print("######## Tournois ########\
-                \n\n1. Nouveau \n2. Reprende \n3. Historique \nR: Retour")
-        choice = input("\n>> ")
-        if choice == "1":
-            TournamentControl.create_tournament()
-        elif choice == "2":
-            TournamentControl.open_tournament()
-        elif choice == "3":
-            TournamentControl.tournament_history()
-        elif choice == "R":
-            Controller.main_menu()
+            ViewController.player_menu()
         else:
             pass

@@ -1,5 +1,5 @@
-from Model.tournament_model import Model as Tournament_model
-from Model.player_model import Model as Player_model
+from model.tournament_model import Model as TournamentModel
+from model.player_model import Model as PlayerModel
 
 
 class PlayerControl:
@@ -12,7 +12,7 @@ class PlayerControl:
         gender = input("sexe:")
         ranking = input("classement du joueur:")
 
-        player = Player_model(name, surname, birthdate, gender, ranking)
+        player = PlayerModel(name, surname, birthdate, gender, ranking)
 
         return player
 
@@ -36,7 +36,7 @@ class TournamentControl:
             rounds = 4
         timing = input("Contrôle du temps: ")
         description = input("Description: ")
-        tournament = Tournament_model(name, place, date, rounds, [], timing, description)
+        tournament = TournamentModel(name, place, date, rounds, [], timing, description)
 
         print("\n\n1. Confirmer\n2. Refaire\n3. Retour")
         verify = input("\n>>> ")
@@ -53,7 +53,7 @@ class TournamentControl:
 
     @staticmethod
     def open_tournament():
-        return 0\
+        return 0
 
     @staticmethod
     def tournament_history():
@@ -69,11 +69,14 @@ class TournamentControl:
 
     @staticmethod
     def pairing_players():
-        '''pairs = []
+        """pairs = []
 
         half = len(players) // 2
-        leaderboard = sorted(players, key=lambda player: player.get('ranking', {}))
+        leaderboard = sorted(players, \
+        key=lambda player: player.get('ranking', {}))
 
         for rank in range(half):
-            pairs.append((leaderboard[rank], leaderboard[rank + half]))
-        return pairs'''
+            pairs.append((leaderboard[rank], \
+            leaderboard[rank + half]))
+        return pairs"""
+        return 0

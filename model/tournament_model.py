@@ -1,5 +1,4 @@
-from control.model_control import PlayerControl as player
-#from control.database import *
+
 
 
 class Model:
@@ -40,9 +39,9 @@ class Model:
         while len(self.players) < 8:
             val = input("\n: ")
             if val == "1":
-                self.players.append(player.create_player())
+                self.players.append(PlayerControl.create_player())
             elif val == "2":
-                self.players.append(player.add_players())
+                self.players.append(PlayerControl.add_player())
             elif val == "3":
                 return 0
             else:
