@@ -1,4 +1,4 @@
-class Model:
+class Player:
     def __init__(self, name, surname, birthdate, gender, ranking):
         self.name = name
         self.surname = surname

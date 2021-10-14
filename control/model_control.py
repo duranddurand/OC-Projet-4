@@ -1,5 +1,6 @@
-from model.tournament_model import Model as TournamentModel
-from model.player_model import Model as PlayerModel
+from model.tournament_model import Tournament as TournamentModel
+from model.player_model import Player as PlayerModel
+from views import print_view
 
 
 class PlayerControl:
@@ -66,6 +67,21 @@ class TournamentControl:
     @staticmethod
     def edit_leaderboard():
         return 0
+
+    @staticmethod
+    def tournament_players(players):
+        print("Decompte: " + str(len(players)))
+        print_view(6)
+        while len(players) < 8:
+            val = input("\n: ")
+            if val == "1":
+                PlayerControl.create_player()
+            elif val == "2":
+                PlayerControl.add_player()
+            elif val == "3":
+                return 0
+            else:
+                pass
 
     @staticmethod
     def pairing_players():
