@@ -1,0 +1,20 @@
+Index: __main__.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from program.start import start\n\ndef main():\n    start()
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/__main__.py b/__main__.py
+--- a/__main__.py	
++++ b/__main__.py	
+@@ -1,4 +1,6 @@
+ from program.start import start
+ 
+ def main():
+-    start()
+\ No newline at end of file
++    start()
++
++start()
+\ No newline at end of file

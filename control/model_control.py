@@ -25,10 +25,25 @@ class PlayerControl:
     def add_player():
         return 0
 
+    @staticmethod
+    def serialize_player(player):
+        player_in_dict = {
+            'id': player.id,
+            'nom': player.name,
+            'surname': player.surname,
+            'birthdate': player.birthdate,
+            'gender': player.gender,
+            'ranking': player.ranking
+        }
+
+        return player_in_dict
+
+
+
 
 class TournamentControl:
     @staticmethod
-    def create_tournament():
+    def generate():
         name = input("Nom du tournoi: ")
         place = input("Lieu: ")
         date = input("Date du tournoi (Format: jj/mm/aaaa): ")
@@ -53,11 +68,11 @@ class TournamentControl:
         return tournament
 
     @staticmethod
-    def open_tournament():
+    def open():
         return 0
 
     @staticmethod
-    def tournament_history():
+    def history():
         return 0
 
     @staticmethod

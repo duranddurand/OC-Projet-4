@@ -1,42 +1,52 @@
-from model_control import PlayerControl as Player, TournamentControl as Tournament
-from view.views import print_view
 import os
+from model_control import PlayerControl, TournamentControl
+from views import Views
+from database_control import Database
 
 
-class Controller:
+class MainController:
+
+    def __init__(self):
+        self.player = PlayerControl
+        self.tournament = TournamentControl
+        self.view = Views
 
     @staticmethod
     def main_menu():
-        print_view(1)
+        Views.print(1)
         choice = input("\n>> ")
 
         if choice == "1":
-            Controller.clear()
-            Controller.tournament_menu()
+            clear()
+            MainController.tournament_menu()
         elif choice == "2":
-            Controller.clear()
-            Controller.player_menu()
+            clear()
+            MainController.player_menu()
         elif choice == "3":
-            Controller.exit_program()
+            exit_program()
 
-    @staticmethod
-    def tournament_menu():
-        print_view(2)
+    def tournament_menu(self):
+        Views.print(2)
         choice = input("\n>> ")
         if choice == "1":
-            Tournament.create_tournament()
+            clear()
+            Database.tournament_table()
+            Database.tournament_table.insert(self.tournament.generate())
         elif choice == "2":
-            Tournament.open_tournament()
+            clear()
+            self.tournament.open()
         elif choice == "3":
-            Tournament.tournament_history()
+            clear()
+            self.tournament.history()
         elif choice == "4":
-            Controller.main_menu()
+            clear()
+            MainController.main_menu()
         else:
             pass
 
     @staticmethod
     def player_menu():
-        print_view(3)
+        Views.print(3)
         choice = input("\n>> ")
 
         if choice == "1":
@@ -44,9 +54,9 @@ class Controller:
         elif choice == "2":
             Player.edit_player()
         elif choice == "3":
-            Controller.leaderboard()
+            MainController.leaderboard()
         elif choice == "4":
-            Controller.main_menu()
+            MainController.main_menu()
         else:
             pass
 
@@ -60,17 +70,19 @@ class Controller:
         elif choice == "2":
             Tournament.edit_leaderboard()
         elif choice == "3":
-            Controller.player_menu()
+            MainController.player_menu()
         else:
             pass
 
-    @staticmethod
-    def clear():
-        if os.name == 'posix':
-            _ = os.system('clear')
-        else:
-            _ = os.system('cls')
 
-    @staticmethod
-    def exit_program():
-        pass
+def clear():
+    if os.name == 'posix':
+        _ = os.system('clear')
+    else:
+        _ = os.system('cls')
+
+
+def exit_program():
+    return 0
+    pass
+
