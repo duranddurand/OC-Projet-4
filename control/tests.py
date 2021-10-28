@@ -19,16 +19,12 @@ def serialize_player(play):
     return player_in_dict
 
 
-db = TinyDB('db.json')
-players_table = db.table('players')
+
 players_table.truncate() # clear the table first
 players_table.insert(serialize_player(player))
 players_table.insert(serialize_player(player2))
 
-
-d = players_table
-
-for i in d:
+for i in players_table:
     print('\n')
     print(i)
     print('\n')

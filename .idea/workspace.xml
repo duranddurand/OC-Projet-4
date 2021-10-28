@@ -8,12 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e52ee278-5cb8-4d57-a8e4-ba12150bd06e" name="Changes" comment="renamed view_control to main_control">
-      <change afterPath="$PROJECT_DIR$/control/pairing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/control/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/control/tournament_control.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/control/database_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/database_control.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/control/main_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/main_control.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/control/model_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/model_control.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/control/model_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/player_control.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/control/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/player_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/player_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/tournament_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/tournament_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/view/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +31,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="main" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -34,6 +41,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -54,31 +62,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/control" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="project.scopes" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/control" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/view" />
       <recent name="$PROJECT_DIR$/Model" />
       <recent name="$PROJECT_DIR$/db" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/view" />
       <recent name="$PROJECT_DIR$/control-old" />
       <recent name="$PROJECT_DIR$/control" />
       <recent name="$PROJECT_DIR$/db" />
       <recent name="$PROJECT_DIR$/Controller" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tests">
+  <component name="RunManager" selected="Python.__main__">
     <configuration name="Projet-4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="swiss-chess" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -164,7 +173,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="model_control" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="player_control" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="swiss-chess" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -176,7 +185,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/control/model_control.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/control/player_control.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -209,16 +218,16 @@
     <list>
       <item itemvalue="Python.Projet-4" />
       <item itemvalue="Python.__main__" />
-      <item itemvalue="Python.model_control" />
       <item itemvalue="Python.main_control" />
       <item itemvalue="Python.tests" />
+      <item itemvalue="Python.player_control" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.__main__" />
         <item itemvalue="Python.tests" />
         <item itemvalue="Python.main_control" />
-        <item itemvalue="Python.model_control" />
+        <item itemvalue="Python.player_control" />
         <item itemvalue="Python.Projet-4" />
       </list>
     </recent_temporary>

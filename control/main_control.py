@@ -1,5 +1,6 @@
 import os
-from model_control import PlayerControl, TournamentControl
+from player_control import PlayerControl
+from tournament_control import TournamentControl
 from views import Views
 from database_control import Database
 
@@ -24,35 +25,36 @@ class MainController:
             MainController.player_menu()
         elif choice == "3":
             exit_program()
+        return 0
 
-    def tournament_menu(self):
+    @staticmethod
+    def tournament_menu():
         Views.print(2)
         choice = input("\n>> ")
         if choice == "1":
             clear()
-            Database.tournament_table()
-            Database.tournament_table.insert(self.tournament.generate())
+            TournamentControl.generate()
         elif choice == "2":
             clear()
-            self.tournament.open()
+            TournamentControl.open()
         elif choice == "3":
             clear()
-            self.tournament.history()
+            TournamentControl.history()
         elif choice == "4":
             clear()
             MainController.main_menu()
         else:
             pass
 
-    @staticmethod
-    def player_menu():
+    def player_menu(self):
         Views.print(3)
         choice = input("\n>> ")
 
         if choice == "1":
-            Player.create_player()
+            clear()
+            new = self.player.generate()
         elif choice == "2":
-            Player.edit_player()
+            Player.edit()
         elif choice == "3":
             MainController.leaderboard()
         elif choice == "4":
