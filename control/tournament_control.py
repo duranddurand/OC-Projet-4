@@ -1,5 +1,6 @@
 from database_control import Database
 from model.tournament_model import Tournament as TournamentModel
+from model.player_model import Player
 
 
 class TournamentControl:
@@ -23,7 +24,7 @@ class TournamentControl:
         verify = input("\n>>> ")
 
         if verify == "1":
-            Database.in_sert(tourn)
+            Database.insert_in_db(tourn)
         elif verify == "2":
             pass
         elif verify == "3":
@@ -63,15 +64,35 @@ class TournamentControl:
         return selected
 
     @staticmethod
-    def pairing_players():
-        """pairs = []
+    def pairing_players(tournament):
+        turn = Database.get_played_turns(tournament)
+        if turn == 1:
+            players.sort(key=lambda p: p['ranking'])
+
+        else:
+            players = Database('Tournament').get_played_turns(tournament)
+            players.sort(key=lambda p: (p['ranking'], p['score']))
 
         half = len(players) // 2
-        leaderboard = sorted(players, \
-        key=lambda player: player.get('ranking', {}))
 
-        for rank in range(half):
-            pairs.append((leaderboard[rank], \
-            leaderboard[rank + half]))
-        return pairs"""
-        return 0
+        alpha = players[:half]
+        beta = players[half:]
+
+        pairs = zip(alpha, beta)
+
+        return pairs
+
+
+tourn = TournamentModel("blabla", "paris", "29/10/2021", 4, [], "Blitz", "super sympa!")
+player1 = Player("joe1", "sddkfo", "20/10/2002", "M", 1, 500).serialized()
+player2 = Player("joe2", "sddkfo", "20/10/2002", "M", 2, 500).serialized()
+player3 = Player("joe3", "sddkfo", "20/10/2002", "M", 3, 500).serialized()
+player4 = Player("joe4", "sddkfo", "20/10/2002", "M", 4, 500).serialized()
+player5 = Player("joe5", "sddkfo", "20/10/2002", "M", 5, 500).serialized()
+player6 = Player("joe6", "sddkfo", "20/10/2002", "M", 6, 500).serialized()
+player7 = Player("joe7", "sddkfo", "20/10/2002", "M", 7, 500).serialized()
+player8 = Player("joe8", "sddkfo", "20/10/2002", "M", 8, 500).serialized()
+players = [player1, player2, player3, player4, player5, player6, player7, player8]
+result = TournamentControl.pairing_players(players, 1, tourn)
+Database.insert_turn(turn)
+print(*result)

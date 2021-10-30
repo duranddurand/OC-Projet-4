@@ -19,18 +19,5 @@ class PlayerControl:
     def edit():
         return 0
 
-    @staticmethod
-    def serialized(player):
-        dict = {
-            'id': player.id,
-            'nom': player.name,
-            'surname': player.surname,
-            'birthdate': player.birthdate,
-            'gender': player.gender,
-            'ranking': player.ranking
-        }
-
-        return dict
-
 
 
