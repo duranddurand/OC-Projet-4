@@ -7,13 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e52ee278-5cb8-4d57-a8e4-ba12150bd06e" name="Changes" comment="different structure not working. struggle to understand class interractions.">
-      <change afterPath="$PROJECT_DIR$/control/pairing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/control/pairing_t.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="e52ee278-5cb8-4d57-a8e4-ba12150bd06e" name="Changes" comment="&quot;&quot;&quot;">
       <change beforePath="$PROJECT_DIR$/control/database_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/database_control.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/control/player_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/player_control.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/control/tests.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/control/tournament_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/tournament_control.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +78,7 @@
       <recent name="$PROJECT_DIR$/Controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.pairing_t">
+  <component name="RunManager" selected="Python.tournament_control">
     <configuration name="__main__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="swiss-chess" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -220,9 +215,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.pairing_t" />
         <item itemvalue="Python.tournament_control" />
         <item itemvalue="Python.__main__" />
+        <item itemvalue="Python.pairing_t" />
         <item itemvalue="Python.tests" />
         <item itemvalue="Python.main_control" />
       </list>
@@ -279,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635393942442</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="&quot;&quot;&quot;">
+      <created>1635600693010</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1635600693010</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -301,7 +303,8 @@
     <MESSAGE value="created views in views file as dict" />
     <MESSAGE value="renamed view_control to main_control" />
     <MESSAGE value="different structure not working. struggle to understand class interractions." />
-    <option name="LAST_COMMIT_MESSAGE" value="different structure not working. struggle to understand class interractions." />
+    <MESSAGE value="&quot;&quot;&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;&quot;&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

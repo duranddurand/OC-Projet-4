@@ -29,8 +29,6 @@ class Database:
 
         return table
 
-    def get_players(self):
-
     def save_rounds(self, match):
         table = self.round_table()
         for match in match:

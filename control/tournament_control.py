@@ -93,6 +93,6 @@ player6 = Player("joe6", "sddkfo", "20/10/2002", "M", 6, 500).serialized()
 player7 = Player("joe7", "sddkfo", "20/10/2002", "M", 7, 500).serialized()
 player8 = Player("joe8", "sddkfo", "20/10/2002", "M", 8, 500).serialized()
 players = [player1, player2, player3, player4, player5, player6, player7, player8]
-result = TournamentControl.pairing_players(players, 1, tourn)
+result = TournamentControl.pairing_players(players)
 Database.insert_turn(turn)
 print(*result)
