@@ -1,0 +1,127 @@
+Index: control/tests.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from model.player_model import Player\nfrom tinydb import TinyDB\n\nplayer = Player('john', 'doe', '12/10/2001', 'M', 10, 0)\nplayer2 = Player('james', 'adsf', '13/10/3001', 'F', 9, 0)\n\n\ndef serialize_player(play):\n    player_in_dict = {\n        'id': play.id,\n        'name': play.name,\n        'surname': play.surname,\n        'birthdate': play.birthdate,\n        'gender': play.gender,\n        'ranking': play.ranking,\n        'score': play.score\n    }\n\n    return player_in_dict\n\n\ndb = TinyDB('db.json')\nplayers_table = db.table('players')\nplayers_table.truncate() # clear the table first\nplayers_table.insert(serialize_player(player))\nplayers_table.insert(serialize_player(player2))\n\n\nd = players_table\n\nfor i in d:\n    print('\\n')\n    print(i)\n    print('\\n')\n\n# search(where('name') == 'john')
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/control/tests.py b/control/tests.py
+--- a/control/tests.py	(revision deeeb25bd5a01abb64d87193b4bb459f047c9504)
++++ b/control/tests.py	(date 1635857406288)
+@@ -33,4 +33,41 @@
+     print(i)
+     print('\n')
+ 
+-# search(where('name') == 'john')
+\ No newline at end of file
++# search(where('name') == 'john')
++
++d = ["a", "b", "c", "d", "e", "f", "g", "h"]
++d1 = [["a", "b"], ["b", "c"], ["e", "h"], ["a", "g"]]
++d2 = []
++for i in range(8):
++    for j in range(i + 1, 8):
++        if [d[i], d[j]] not in d1:
++            d2.append([d[i], d[j], i + j])
++
++d2.sort(key=lambda x: x[2], reverse=True)
++list_1 = []
++list_1.append(d2[0])
++list_1.append(d2[7])
++
++
++def check_player_exist(list_matchs, match):
++    for i in list_matchs:
++        if match[0] == i[0] or match[0] == i[1] or match[1] == i[0] or match[1] == i[1]:
++            return False
++    return True
++
++
++def list_comb(list_comb):
++    for i in range(len(list_comb)):
++        list2 = []
++        list2.append(list_comb[i])
++        for j in range(i + 1, len(list_comb)):
++            if check_player_exist(list2, list_comb[j]):
++                list2.append(list_comb[j])
++                for k in range(j + 1, len(list_comb)):
++                    if check_player_exist(list2, list_comb[k]):
++                        list2.append(list_comb[k])
++                        for l in range(k + 1, len(list_comb)):
++                            if check_player_exist(list2, list_comb[l]):
++                                list2.append(list_comb[l])
++                                return list2
++    return -1
+Index: control/main_control.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import os\nfrom model_control import PlayerControl, TournamentControl\nfrom views import Views\nfrom database_control import Database\n\n\nclass MainController:\n\n    def __init__(self):\n        self.player = PlayerControl\n        self.tournament = TournamentControl\n        self.view = Views\n\n    @staticmethod\n    def main_menu():\n        Views.print(1)\n        choice = input(\"\\n>> \")\n\n        if choice == \"1\":\n            clear()\n            MainController.tournament_menu()\n        elif choice == \"2\":\n            clear()\n            MainController.player_menu()\n        elif choice == \"3\":\n            exit_program()\n\n    def tournament_menu(self):\n        Views.print(2)\n        choice = input(\"\\n>> \")\n        if choice == \"1\":\n            clear()\n            Database.tournament_table()\n            Database.tournament_table.insert(self.tournament.generate())\n        elif choice == \"2\":\n            clear()\n            self.tournament.open()\n        elif choice == \"3\":\n            clear()\n            self.tournament.history()\n        elif choice == \"4\":\n            clear()\n            MainController.main_menu()\n        else:\n            pass\n\n    @staticmethod\n    def player_menu():\n        Views.print(3)\n        choice = input(\"\\n>> \")\n\n        if choice == \"1\":\n            Player.create_player()\n        elif choice == \"2\":\n            Player.edit_player()\n        elif choice == \"3\":\n            MainController.leaderboard()\n        elif choice == \"4\":\n            MainController.main_menu()\n        else:\n            pass\n\n    @staticmethod\n    def leaderboard():\n        print_view(4)\n        choice = input(\"\\n>> \")\n\n        if choice == \"1\":\n            Tournament.display_leaderboard()\n        elif choice == \"2\":\n            Tournament.edit_leaderboard()\n        elif choice == \"3\":\n            MainController.player_menu()\n        else:\n            pass\n\n\ndef clear():\n    if os.name == 'posix':\n        _ = os.system('clear')\n    else:\n        _ = os.system('cls')\n\n\ndef exit_program():\n    return 0\n    pass\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/control/main_control.py b/control/main_control.py
+--- a/control/main_control.py	(revision deeeb25bd5a01abb64d87193b4bb459f047c9504)
++++ b/control/main_control.py	(date 1635857406288)
+@@ -50,9 +50,9 @@
+         choice = input("\n>> ")
+ 
+         if choice == "1":
+-            Player.create_player()
++            PlayerControl.create_player()
+         elif choice == "2":
+-            Player.edit_player()
++            PlayerControl.edit_player()
+         elif choice == "3":
+             MainController.leaderboard()
+         elif choice == "4":
+@@ -62,13 +62,13 @@
+ 
+     @staticmethod
+     def leaderboard():
+-        print_view(4)
++        Views(4)
+         choice = input("\n>> ")
+ 
+         if choice == "1":
+-            Tournament.display_leaderboard()
++            TournamentControl.display_leaderboard()
+         elif choice == "2":
+-            Tournament.edit_leaderboard()
++            TournamentControl.edit_leaderboard()
+         elif choice == "3":
+             MainController.player_menu()
+         else:
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AnalysisUIOptions\">\n    <option name=\"SPLITTER_PROPORTION\" value=\"0.30670553\" />\n  </component>\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"e52ee278-5cb8-4d57-a8e4-ba12150bd06e\" name=\"Changes\" comment=\"renamed view_control to main_control\">\n      <change afterPath=\"$PROJECT_DIR$/control/pairing.py\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/control/tests.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/__main__.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/__main__.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/control/main_control.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/control/main_control.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/control/model_control.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/control/model_control.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/model/player_model.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/model/player_model.py\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"NamedScopeManager\">\n    <scope name=\"Focus python\" pattern=\"!ext:*&amp;&amp;!file:.gitattributes&amp;&amp;!file:.LICENSE&amp;&amp;!file[swiss-chess]:.idea/*&amp;&amp;!file[swiss-chess]:.idea//*&amp;&amp;!ext:*/&amp;&amp;!ext[&lt; Python 3.9 &gt;]:*/&amp;&amp;!ext[Python 3.9]:python3.9//*\" />\n  </component>\n  <component name=\"ProblemsViewState\">\n    <option name=\"selectedIndex\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"1zDh41uHqA1M2yU5Xynrbd0qeau\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showExcludedFiles\" value=\"false\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n    <property name=\"run.code.analysis.last.selected.profile\" value=\"aDefault\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"project.scopes\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$\" />\n      <recent name=\"$PROJECT_DIR$/view\" />\n      <recent name=\"$PROJECT_DIR$/Model\" />\n      <recent name=\"$PROJECT_DIR$/db\" />\n      <recent name=\"$PROJECT_DIR$/src\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/control-old\" />\n      <recent name=\"$PROJECT_DIR$/control\" />\n      <recent name=\"$PROJECT_DIR$/db\" />\n      <recent name=\"$PROJECT_DIR$/Controller\" />\n      <recent name=\"$PROJECT_DIR$\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Python.tests\">\n    <configuration name=\"Projet-4\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"swiss-chess\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"/usr/local/bin/python3.9\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"__main__\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"swiss-chess\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n        <env name=\"TERM\" value=\"xterm-color\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/__main__.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"__main__\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"swiss-chess\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"/usr/local/bin/python3.9\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/__main__.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"main_control\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"swiss-chess\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/control\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/control/main_control.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"model_control\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"swiss-chess\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/control\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/control/model_control.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"tests\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"swiss-chess\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/control\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/control/tests.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <list>\n      <item itemvalue=\"Python.Projet-4\" />\n      <item itemvalue=\"Python.__main__\" />\n      <item itemvalue=\"Python.model_control\" />\n      <item itemvalue=\"Python.main_control\" />\n      <item itemvalue=\"Python.tests\" />\n    </list>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Python.__main__\" />\n        <item itemvalue=\"Python.tests\" />\n        <item itemvalue=\"Python.main_control\" />\n        <item itemvalue=\"Python.model_control\" />\n        <item itemvalue=\"Python.Projet-4\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"e52ee278-5cb8-4d57-a8e4-ba12150bd06e\" name=\"Changes\" comment=\"\" />\n      <created>1633688379097</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1633688379097</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"strugle with application file structure. changed a few times.&#10;now: /db, /view, /controller, /model\">\n      <created>1633898459260</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1633898459260</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"cant test with main. issue importing class modules from package\">\n      <created>1634137725198</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1634137725198</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"test works: had to remove virtual env for consol to work properly&gt; Also packages need to be addeds as source.\">\n      <created>1634234065131</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1634234065131</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"created views in views file as dict\">\n      <created>1634235604680</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1634235604680</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"renamed view_control to main_control\">\n      <created>1634237021489</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1634237021489</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"6\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"strugle with application file structure. changed a few times.&#10;now: /db, /view, /controller, /model\" />\n    <MESSAGE value=\"cant test with main. issue importing class modules from package\" />\n    <MESSAGE value=\"test works: had to remove virtual env for consol to work properly&gt; Also packages need to be addeds as source.\" />\n    <MESSAGE value=\"created views in views file as dict\" />\n    <MESSAGE value=\"renamed view_control to main_control\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"renamed view_control to main_control\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <default-breakpoints>\n        <breakpoint type=\"python-exception\">\n          <properties notifyOnTerminate=\"true\" exception=\"BaseException\">\n            <option name=\"notifyOnTerminate\" value=\"true\" />\n          </properties>\n        </breakpoint>\n      </default-breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision deeeb25bd5a01abb64d87193b4bb459f047c9504)
++++ b/.idea/workspace.xml	(date 1635857406287)
+@@ -8,12 +8,8 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="e52ee278-5cb8-4d57-a8e4-ba12150bd06e" name="Changes" comment="renamed view_control to main_control">
+-      <change afterPath="$PROJECT_DIR$/control/pairing.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/control/tests.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/control/main_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/main_control.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/control/model_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/model_control.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/model/player_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/player_model.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/control/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/tests.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -215,8 +211,8 @@
+     </list>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Python.__main__" />
+         <item itemvalue="Python.tests" />
++        <item itemvalue="Python.__main__" />
+         <item itemvalue="Python.main_control" />
+         <item itemvalue="Python.model_control" />
+         <item itemvalue="Python.Projet-4" />

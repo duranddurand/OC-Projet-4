@@ -8,12 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e52ee278-5cb8-4d57-a8e4-ba12150bd06e" name="Changes" comment="renamed view_control to main_control">
-      <change afterPath="$PROJECT_DIR$/control/pairing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/control/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/control/main_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/main_control.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/control/model_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/control/model_control.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/player_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/player_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +21,9 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="Methodic" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">

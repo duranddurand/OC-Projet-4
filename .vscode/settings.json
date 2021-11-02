@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "./control",
+        "./model",
+        "./database"
+    ],
+    "files.insertFinalNewline": true
+}
