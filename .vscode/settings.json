@@ -2,7 +2,14 @@
     "python.analysis.extraPaths": [
         "./control",
         "./model",
-        "./database"
+        "./database",
+        "./src"
     ],
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "files.autoSave": "onFocusChange",
+    "python.testing.pytestArgs": [
+        "testenv"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

@@ -1,4 +1,4 @@
-from model.player_model import Player
+from models import Player
 from tinydb import TinyDB
 
 player = Player('john', 'doe', '12/10/2001', 'M', 10, 0)

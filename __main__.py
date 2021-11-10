@@ -1,4 +1,4 @@
-from control.main_control import MainController
+from controls import main_menu
 
 if __name__ == '__main__':
-    MainController.main_menu()
+   main_menu()
