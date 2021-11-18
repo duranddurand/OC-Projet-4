@@ -1,6 +1,6 @@
 import os
 
-from models import *
+from models import Player, Tournament, Views
 from tinydb import TinyDB, table, Query
 
 
@@ -10,8 +10,8 @@ def clear():
 def exit_program():
     return 0
 
-# Display a list of choices. each one opens a different menu or exit app
-# 
+# Display a list of choices
+# each one opens a different menu or exit app
 def main_menu():
     Views.print(1)
     choice = input("\n>> ")
@@ -25,7 +25,11 @@ def main_menu():
     elif choice == "3":
         exit_program()
 
-
+# Display a list of choices.
+# Create tournament
+# list open tournaments
+# list tournament archives
+# return to main menu
 def tournament_menu():
     Views.print(2)
     choice = input("\n>> ")
@@ -34,17 +38,21 @@ def tournament_menu():
         create_tournament()
     elif choice == "2":
         clear()
-        list_open_tournaments()
+        Database.list_open_tournaments()
     elif choice == "3":
         clear()
-        list_tournaments_archive()
+        Database.list_tournaments_archive()
     elif choice == "4":
         clear()
         main_menu()
     else:
         pass
 
-
+# Display a list of choices.
+# Create player
+# edit player
+# access leaderboard menu
+# return to main menu 
 def player_menu():
     Views.print(3)
     choice = input("\n>> ")
@@ -60,13 +68,16 @@ def player_menu():
     else:
         pass
 
-
+# Display a list of choices.
+# Display leaderboard
+# edit leaderboard
+# return to main menu
 def leaderboard_menu():
     Views.print(4)
     choice = input("\n>> ")
 
     if choice == "1":
-        return 0()
+        return 0
     elif choice == "2":
         return 0
     elif choice == "3":
@@ -76,80 +87,8 @@ def leaderboard_menu():
 
 
 ################################################
-################## Database ####################
-################################################
-
-db = TinyDB('chess.json')
-player1 = Player("duran","anis","25/02/1998","M",1,0)
-player2 = Player("duion","afnis","24/02/1998","M",1,0)
-
-def insert_player(player) :
-    table = db.table('players')
-    table.insert(serialize_player(player))
-
-
-def insert_tournament(tournament):
-    table = db.table('tournaments')
-    table.insert(serialize_tournament(tournament))
-
-
-def insert_round(round):
-    table = db.table('rounds')
-    table.insert(round)
-
-def list_players():
-    table = db.table('players')
-    tournaments = table.all()
-    
-    return tournaments
-
-
-def list_tournaments():
-    table = db.table('tournaments')
-    tournaments = table.all()
-    
-    return tournaments
-
-def list_open_tournaments():
-    table = db.table('tournaments')
-    tourn = Query()
-    players = table.search(tourn.archive == '0')
-
-    return table
-
-def list_tournaments_archive():
-    table = db.table('tournaments')
-    tourn = Query()
-    players = table.search(tourn.archive == '1')
-
-    return table
-
-def list_tournament_players(tournament):
-    table = db.table('tournaments')
-    tourn = Query()
-    players = table.search(tourn.id == tournament.id)['players']
-    
-    return players
-
-def list_tournament_rounds(tournament):
-    table = db.table('rounds')
-    tourn = Query()
-    rounds = table.search(tourn.id == tournament.id)
-    
-    return rounds
-
-def list_round_matches(round):
-    table = db.table('matches')
-    matches = table.all()
-    
-    return matches
-
-
-################################################
 #################### Player ####################
 ################################################
-
-
 
 def create_player():
     name = input("Prénom du joueur:")
@@ -163,7 +102,7 @@ def create_player():
     Views.print(6)
     verify = input("\n>>> ")
     if verify == "1":
-        insert_player(serialize_player(player))
+        Database.insert_player(serialize_player(player))
     elif verify == "2":
         clear()
         create_player()
@@ -183,8 +122,8 @@ def serialize_player(player):
     return player_in_dict
 
 def select_players():
-    for i in list_players:
-        print(str(i + 1) + ': ' + list_players[i])
+    for i in Database.list_all_players:
+        print(str(i + 1) + ': ' + Database.list_all_players[i])
     
     selection = []
     selection.append(input('>>> : '))
@@ -210,7 +149,7 @@ def create_tournament():
     Views.print(6)
     verify = input("\n>>> ")
     if verify == "1":
-        insert_tournament(serialize_tournament(tournament))
+        Database.insert_tournament(serialize_tournament(tournament))
     elif verify == "2":
         clear()
         create_tournament()
@@ -218,6 +157,21 @@ def create_tournament():
         pass
 
     return tournament
+
+def serialize_tournament(tournament):
+    tournament_in_dict = {
+        'id': tournament.id,
+        'name': tournament.name,
+        'place': tournament.place,
+        'date': tournament.date,
+        'rounds': tournament.rounds,
+        'players': tournament.players,
+        'timing': tournament.timing,
+        'description': tournament.description,
+        'archive': tournament.archive
+    }
+
+    return tournament_in_dict
 
 def tournament_players():
     players = []
@@ -236,19 +190,89 @@ def tournament_players():
     
     return players
 
-def serialize_tournament(tournament):
-    tournament_in_dict = {
-        'id': tournament.id,
-        'name': tournament.name,
-        'place': tournament.place,
-        'date': tournament.date,
-        'rounds': tournament.rounds,
-        'players': tournament.players,
-        'timing': tournament.timing,
-        'description': tournament.description,
-        'archive': tournament.archve
 
-    }
+################################################
+################## Database ####################
+################################################
+
+player1 = Player("duran","anis","25/02/1998","M",1,0)
+player2 = Player("duion","afnis","24/02/1998","M",1,0)
+
+class Database:
+
+    def __init__ (self,db_name):
+        self.db=TinyDB('/database/' + str(db_name) + '.json')
+        
+    def truncate_table(self,table_):
+        self.db.table(table_).truncate()
+    
+    # insert serialised player in database table 'player'
+    def insert_player(self, player) :
+        table = self.db.table('players')
+        table.insert(serialize_player(player))
+
+    # insert serialised tournament in database table 'tournament'
+    def insert_tournament(self, tournament):
+        table = self.db.table('tournaments')
+        table.insert(serialize_tournament(tournament))
+
+    def get_all(self,table_):
+        return self.db_.table(table_).all()
+
+    # list all open in the database table 'tournament'
+    def list_open_tournaments(self):
+        table = self.db.table('tournaments')
+        tourn = Query()
+        players = table.search(tourn.archive == '0')
+
+        return table
+
+    # list all archived tournament in the database table 'tournament'
+    def list_tournaments_archive(self):
+        table = self.db.table('tournaments')
+        tourn = Query()
+        players = table.search(tourn.archive == '1')
+
+        return table
+
+    # lists players for a designated tournament in the database
+    def list_tournament_players(self, tournament):
+        table = self.db.table('tournaments')
+        tourn = Query()
+        players = table.search(tourn.id == tournament.id)[5]
+        
+        return players
+
+    # lists rounds for a designated tournament in the database
+    def list_tournament_matches(self, tournament):
+        table = self.db.table('matches')
+        tourn = Query()
+        matches = table.search(tourn.id == tournament.id)['matches']
+        
+        return matches
+
+    # lists matches in a designated round in the database
+    def list_tournament_rounds(self, tournament):
+        table = self.db.table('matches')
+        matches = table.all()
+        
+        return matches
+
+
+################################################
+################### Pairing  ###################
+################################################
+
+playerslist1 = []
+for i in range(8):
+    playerslist1.append(Player('name' + str(i),'surname'  + str(i), '20/11/200' + str(i), 'M', i + 1, i*3))
+    Database.insert_player(Player('name' + str(i),'surname'  + str(i), '20/11/200' + str(i), 'M', i + 1, i*3))
+
+tournament1 = Tournament('superchampion', 'Lisbon', '20/11/2021', 4, playerslist1, 'blitz', 'super')
+
+print(tournament1['id'])
+
+print(Database.list_tournament_players(tournament1))
 
 def pairing_players(tournament_players):
 
@@ -290,5 +314,3 @@ def list_comb(list_comb):
                                         list2.append(list_comb[l])
                                         return list2
     return -1
-
-    list_comb(d2)

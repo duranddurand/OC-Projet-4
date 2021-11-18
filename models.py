@@ -10,6 +10,7 @@ class Player:
 
 class Tournament:
     def __init__(self, name, place, date, rounds, players, timing, description):
+        self.id = (name[0].upper() + date.replace("/", "").upper())
         self.name = name
         self.place = place
         self.date = date
@@ -19,7 +20,14 @@ class Tournament:
         self.description = description
         self.archive = 0
 
-
+class Match:
+    def __init__(self, tournID, RoundNo, player1, player2, result):
+        self.tournid = tournID,
+        self.roundno = RoundNo,
+        self.player1 = player1,
+        self.player2 = player2,
+        self.result = result       
+        
 class Views:
     @staticmethod
     def print(value):
