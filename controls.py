@@ -13,7 +13,7 @@ def exit_program():
 # Display a list of choices
 # each one opens a different menu or exit app
 def main_menu():
-    Views.print(1)
+    print("######## Bienvenue ######## \n\n1: Creer joueur \n2: Creer Tournois \n3: Quitter")
     choice = input("\n>> ")
 
     if choice == "1":
@@ -25,7 +25,7 @@ def main_menu():
     elif choice == "3":
         exit_program()
 
-# Display a list of choices.
+"""# Display a list of choices.
 # Create tournament
 # list open tournaments
 # list tournament archives
@@ -84,7 +84,7 @@ def leaderboard_menu():
         player_menu()
     else:
         pass
-
+"""
 
 ################################################
 #################### Player ####################
@@ -102,7 +102,7 @@ def create_player():
     Views.print(6)
     verify = input("\n>>> ")
     if verify == "1":
-        Database.insert_player(serialize_player(player))
+        Database.insert_player(player)
     elif verify == "2":
         clear()
         create_player()
@@ -201,23 +201,26 @@ player2 = Player("duion","afnis","24/02/1998","M",1,0)
 class Database:
 
     def __init__ (self,db_name):
-        self.db=TinyDB('/database/' + str(db_name) + '.json')
+        self.db=TinyDB(str(db_name) + '.json')
         
     def truncate_table(self,table_):
         self.db.table(table_).truncate()
-    
-    # insert serialised player in database table 'player'
-    def insert_player(self, player) :
-        table = self.db.table('players')
-        table.insert(serialize_player(player))
 
-    # insert serialised tournament in database table 'tournament'
-    def insert_tournament(self, tournament):
-        table = self.db.table('tournaments')
-        table.insert(serialize_tournament(tournament))
+    def query_1(self, table_,var_,val_):
+        q=Query()
+        return self.db_.table(table_).search(q[var_]==val_)
+    
+    def query_2(self, table_,var_1,val_1,var_2,val_2):
+        q=Query()
+        return self.db_.table(table_).search((q[var_1]==val_1)&(q[var_2]==val_2))
+    
+    def insert_db(self,object):
+        table = str(type(object))[17:-2]
+        if not len(self.query_1(table,"id",object.id)):
+            self.db_.table(table).insert(object.serialized())
 
     def get_all(self,table_):
-        return self.db_.table(table_).all()
+        return self.db.table(table_).all()
 
     # list all open in the database table 'tournament'
     def list_open_tournaments(self):
@@ -263,7 +266,7 @@ class Database:
 ################### Pairing  ###################
 ################################################
 
-playerslist1 = []
+"""playerslist1 = []
 for i in range(8):
     playerslist1.append(Player('name' + str(i),'surname'  + str(i), '20/11/200' + str(i), 'M', i + 1, i*3))
     Database.insert_player(Player('name' + str(i),'surname'  + str(i), '20/11/200' + str(i), 'M', i + 1, i*3))
@@ -272,7 +275,7 @@ tournament1 = Tournament('superchampion', 'Lisbon', '20/11/2021', 4, playerslist
 
 print(tournament1['id'])
 
-print(Database.list_tournament_players(tournament1))
+print(Database.list_tournament_players(tournament1))"""
 
 def pairing_players(tournament_players):
 
